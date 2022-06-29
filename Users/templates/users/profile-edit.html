@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block title %}Agency - Редактировать профиль{% endblock %}
+{% block content %}
+
+<h1 class="main-title">Редактировать данные профиля</h1>
+
+<form class="profiLe_edit_form" method="POST" action = "{% url 'profile-edit' %}" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    <div class="profile_form_part">
+        {% for field in form %}
+        {% if field.name != 'photo' %}
+        <label class="profile_form_label" for="{{ field.auto_id }}">{{ field.label }}</label>
+        {{ field }}
+        {% endif %}
+        {% endfor %}
+    </div>
+
+    <div class="profile_form_part">
+        <img class="profile-img profile_edit_img" src="{{ photo.url }}" alt="#">        
+    </div>
+
+    <div class="profile_form_part">
+        {% for field in form %}
+        {% if field.name == 'photo' %}
+        <label class="profile_form_label" for="{{ field.auto_id }}">{{ field.label }}</label>
+        {{ field }}
+        {% endif %}
+        {% endfor %}
+        <input class="message_btn" type="submit" value="Подтвердить"/>
+    </div>
+
+
+</form>
+
+{% endblock %}

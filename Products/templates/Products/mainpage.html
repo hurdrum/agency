@@ -1,0 +1,114 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Agency - Главная{% endblock %}
+
+{% block content %}
+
+<main>
+	<div class="container">
+		<div class="main">
+
+			<div class="search">
+				<img src="{% static 'image/search.png' %}" alt="#">
+				<form method="get" action="{% url 'mainpage' %}">
+					<input placeholder="Поиск объявлений" type="text" name="search" class="form_element form_element_search">
+					<input type="submit" value='Найти' class="message_btn search_btn">
+					<button href="/mainpage" class="message_btn search_btn">Сбросить</button>
+				</form>
+			</div>
+
+			<h1 class="main-title">Новые объявления:</h1>
+			<div class="cards">
+				{% for card in cards %}
+					<a href = 'card{{ card.id }}'>
+						<div class="card">
+							<div class="card-image">
+								<img src='{{ card.photo.url }}' alt="#" class="title-img">
+								<div class="card-tag">{{ card.status }}</div>
+							</div>
+							<div class="card-content">
+								<h3 class="card-title">{{ card.title }}</h3>
+								<div class="field">
+									<div class="field-tag">Адрес:</div>
+									<div class="field-text">{{ card.adress }}</div>
+								</div>
+								<div class="field">
+									<div class="field-tag">Площадь:</div>
+									<div class="field-text">{{ card.area }} м2</div>
+								</div>
+								<div class="field">
+									<div class="field-tag">Цена::</div>
+									<div class="field-text">{{ card.price }} руб</div>
+								</div>
+								<div class="card-text">{{ card.description_main }}</div>
+								<div class="field">
+									<div class="field-tag">Дата публикации объявления:</div>
+									<div class="field-text">{{ card.pub_date }} м2</div>
+								</div>
+
+								<div class="card-information">
+									<div class="short-info">
+										<img src='{% static "image/room.svg" %}' alt="#">
+										<span>{{ card.rooms }} Комнаты</span>		
+									</div>
+									<div class="short-info">
+										<img src='{% static "image/garage.svg" %}' alt="#">
+										<span>{{ card.garages }} Гараж</span>		
+									</div>
+								</div>	
+							</div>
+						</div>
+
+					</a>
+				{% endfor %}
+			</div>    
+
+			<div>
+				<ul class="pagination">
+					{% if cards.has_previous %}
+					<li><a href="?page={{cards.previous_page_number}}" id="prev"> &Lt; Назад </a></li>
+					{% endif %}
+
+					{% for page in paginator.page_range %}
+					<li><a href="?page={{page}}">{{page}}</a></li>
+					{% endfor %}
+
+					{% if cards.has_next %}
+					<li><a href="?page={{cards.next_page_number}}" id="next">Вперед &Gt; </a></li>
+					{% endif %}
+				</ul>
+			</div>
+
+			<h2 class="main-title">Цены</h2>
+			
+			<div class="table-block">
+				<div class="sale-block">
+					<div class="sale-title">Продажа</div>
+					<table>
+						{% for price in prices_sale %}
+						<tr>
+							<td class="object">{{ price.title }}</td>
+							<td class="price">от {{ price.price }} руб. / м2</td>
+						</tr>
+						{% endfor %}
+					</table>
+				</div>
+				<div class="rent-block">
+					<div class="rent-title">Аренда</div>
+					<table>
+						{% for price in prices_rent %}
+						<tr>
+							<td class="object">{{ price.title }}</td>
+							<td class="price">от {{ price.price }} руб. / м2</td>
+						</tr>
+						{% endfor %}
+					</table>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</main>
+
+{% endblock content %}

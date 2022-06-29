@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% load i18n %}
+{% load account socialaccount %}
+
+{% block title %}Agency - Вход{% endblock %}
+
+{% block content %}
+
+
+<h1 class="main-title">Вход</h1>
+
+<form class="profile_form_part" method="POST" action="{% url 'account_login' %}">
+
+  {% csrf_token %}
+  {% for field in form %}
+  {% if field.name == 'remember' %}
+  <div class="remember">
+    {{ field }}
+    <label class="profile_form_label" for="{{ field.auto_id }}">{{ field.label }}</label>
+    <a class="forgot_password_text" href="{% url 'account_reset_password' %}">Забыли пароль?</a>
+  </div>
+  {% else %}
+    <label class="profile_form_label" for="{{ field.auto_id }}">{{ field.label }}</label>
+  {{ field }}
+  {% endif %}
+  {% endfor %}
+
+  {% if redirect_field_value %}
+  <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+  {% endif %}
+
+  <button class="message_btn" type="submit">Войти</button>
+
+</form>
+
+<p class="users_text">Если у вас ещё нет аккаунта, пожалуйста, 
+<a href="{{ signup_url }}">зарегистрируйтесь</a></p>
+
+{% endblock %}

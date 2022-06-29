@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Agency - Контакты{% endblock %}
+
+{% block content %}
+
+<div class="container">
+<div class="container_contacts">
+	<div class="contacts">
+		<h1 class="contact-subtitle">Вы можете связаться с нами<br> удобным для вас способом:</h1>
+		<div class="contact-block">
+			<a href="tel:89123456789" class="number">Телефон: 8 912-345-67-89<a>
+			<a href="mailto:agency@mail.ru" class="mail">Email: agency@mail.ru<a>
+		</div>
+	</div>
+
+	<div class='form_wrapper'>
+		<h1 class="contact-subtitle">Или отправить сообщение:</h1>
+
+		<div class="form" id="form">
+			<form method="POST">
+				{% csrf_token %}
+
+				{% for field in form %}
+				<div>{{ field }}</div>
+				{% endfor %}
+				
+				<button type="submit" class="message_btn">Отправить сообщение</button>
+			</form>
+		</div>
+
+	</div>
+</div>
+</div>
+
+{% endblock %}

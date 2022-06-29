@@ -1,0 +1,64 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="ru">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>{% block title %}{% endblock %}</title>
+		<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+		<link href='{% static "css/reset.css" %}' rel="stylesheet">
+		<link href='{% static "css/style.css" %}' rel="stylesheet">
+		<link href='{% static "image/Logo.svg" %}' rel="icon"> 
+	</head>
+	<body>
+		<header>
+			<div class="container">
+				<div class="header">
+					<a href='{% url "mainpage" %}' rel="noreferrer"><img src='{% static "image/Logo.svg" %}' alt="#" class="logo"></a>
+					<div class="links-block">
+						<a href='{% url "mainpage" %}' {% if page_name == 'mainpage' %} class="active-link" {% endif %}>Главная</a>
+						<a href='{% url "contacts" %}' {% if page_name == 'contacts' %} class="active-link" {% endif %}>Контакты</a>
+						{% if request.user.is_authenticated %}
+							<a href="{% url 'profile' %}" {% if page_name == 'profile' or page_name == 'profile_edit' %} class="active-link" {% endif %}>Аккаунт</a>
+						{% else %}
+							<a href="{% url 'account_login' %}" {% if page_name == 'login' or page_name == 'register' %} class="active-link" {% endif %}>Войти</a>
+						{% endif %}						
+					</div>
+				</div>
+			</div>
+			<div class="line"></div>
+		</header>
+
+		<div {% if page_name != 'profile_edit' %} class="container" {% else %} class="container_profile_edit" {% endif %}>
+
+		{% if messages %}
+		<ul class="messages">
+			{% for message in messages %}
+			<li>{{ message }}</li>
+			{% endfor %}
+		</ul>
+		{% endif %}
+		
+		{% block content %}
+		{% endblock content %}
+
+		</div>
+		
+		<footer>
+			<div class="container">
+				<div class="footer">
+					<div class="footer-text">В нашем каталоге недвижимости Вы обязательно найдете то, что подходит именно Вам. 
+						Для того чтобы купить недвижимость просто посмотрите варианты каталога, выберите интересующие вас объекты, 
+						запишите их номер, и позвоните специалисту или отправьте заявку на покупку.</div>
+
+					<div class="footer-text">Наши специалисты обязательно помогут Вам купить недвижимость, которая Вам нужна, 
+						так как продажа недвижимости наша главная и основная специализация. Обратившись в нашу компанию вы 
+						останетесь довольны оказанными услугами и сможете рекомендовать нас вашим друзьям и знакомым</div>
+				</div>
+				<div class="copyright">© 2008–2020, agency.ru</div>
+			</div>
+		</footer>
+
+	</body>
+</html>
