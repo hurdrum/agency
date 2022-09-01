@@ -1,7 +1,7 @@
 .container {
 	width: 1170px;
 	margin:auto;
-	font-family: Montserrat;
+	font-family: 'Montserrat';
 }
 
 .container_contacts {
@@ -82,7 +82,7 @@ textarea {
 	line-height: 37px;
 	color: #000000;
 	margin-bottom: 30px;
-	margin-top: 70px;
+	margin-top: 50px;
 }
 
 .search {
