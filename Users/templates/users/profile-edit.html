@@ -1,17 +1,19 @@
 {% extends 'base.html' %}
-{% block title %}Agency - Редактировать профиль{% endblock %}
+{% block title %}House & Home - Редактировать профиль{% endblock %}
 {% block content %}
 
-<h1 class="main-title">Редактировать данные профиля</h1>
+<h1 class="profile__title">Редактировать данные профиля</h1>
 
-<form class="profiLe_edit_form" method="POST" action = "{% url 'profile-edit' %}" enctype="multipart/form-data">
+<form class="profile_edit_form" method="POST" action = "{% url 'profile-edit' %}" enctype="multipart/form-data">
     {% csrf_token %}
 
     <div class="profile_form_part">
         {% for field in form %}
         {% if field.name != 'photo' %}
-        <label class="profile_form_label" for="{{ field.auto_id }}">{{ field.label }}</label>
-        {{ field }}
+        <div>
+            <label for="{{ field.auto_id }}">{{ field.label }}</label>
+            {{ field }}
+        </div>
         {% endif %}
         {% endfor %}
     </div>
@@ -19,12 +21,14 @@
     <div class="profile_form_part">
         <img class="profile-img profile_edit_img" src="{{ photo.url }}" alt="#">        
     </div>
-
-    <div class="profile_form_part">
+ 
+    <div class="profile_form_part profile_form_part_photo">
         {% for field in form %}
         {% if field.name == 'photo' %}
-        <label class="profile_form_label" for="{{ field.auto_id }}">{{ field.label }}</label>
-        {{ field }}
+        <div>
+            <label class="profile_form_label" for="{{ field.auto_id }}">{{ field.label }}</label>
+            {{ field }}
+        </div>
         {% endif %}
         {% endfor %}
         <input class="message_btn" type="submit" value="Подтвердить"/>

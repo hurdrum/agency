@@ -2,21 +2,21 @@
 
 {% load i18n %}
 
-{% block title %}Agency - Выход{% endblock %}
+{% block title %}House & Home - Выход{% endblock %}
 
 {% block content %}
 
-<p class="main-title">Вы действительно хотите выйти из аккаунта?</p>
+<div class="logoutpage">
+    <p class="profile__title">Вы действительно хотите выйти из аккаунта?</p>
 
-<form class method="post" action="{% url 'account_logout' %}">
-  {% csrf_token %}
+    <form class method="post" action="{% url 'account_logout' %}">
+      {% csrf_token %}
 
-  <!-- {% if redirect_field_value %}
-  <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
-  {% endif %} -->
+      <!-- {% if redirect_field_value %}
+      <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
+      {% endif %} -->
 
-  <button class="message_btn" type="submit">Выйти</button>
-</form>
-
-
+      <button class="message_btn" type="submit">Выйти</button>
+    </form>
+</div>
 {% endblock %}

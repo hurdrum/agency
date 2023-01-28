@@ -157,3 +157,5 @@ ACCOUNT_FORMS = {
 }
 
 LOGIN_REDIRECT_URL = '/users/profile'
+
+ACCOUNT_EMAIL_VERIFICATION = 'none'

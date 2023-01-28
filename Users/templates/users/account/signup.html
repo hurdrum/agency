@@ -6,23 +6,31 @@
 
 {% block content %}
 
-<h1 class="main-title">Регистрация</h1>
+<h1 class="profile__title">Регистрация</h1>
 
-<form class="profile_form_part" id="signup_form" method="post" action="{% url 'account_signup' %}">
+<ul class="errorlist">
+  {% for key, value in form.errors.items %}
+      <li>{% if key != '__all__' %}{{ key }} {% endif %}{{ value }}</li>
+  {% endfor %}
+  </ul>
+
+<form class="profile__login_form" id="signup_form" method="post" action="{% url 'account_signup' %}">
   {% csrf_token %}
   {% for field in form %}
-    <label class="profile_form_label" for="{{ field.auto_id }}">{{ field.label }}</label>
+  <div>
+    <label for="{{ field.auto_id }}">{{ field.label }}</label>
     {{ field }}
+  </div>
   {% endfor %}
 
   <!-- {% if redirect_field_value %}
   <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
   {% endif %} -->
 
-  <button type="submit" class="message_btn">Создать аккаунт</button>
+  <button type="submit" class="message_btn">Зарегистрироваться</button>
 </form>
 
-<p class="users_text">Уже есть аккаунт?<a style="margin-left: 10px" href="{{ login_url }}">Войти</a></p>
+<p class="users_text last">Уже есть аккаунт? <a href="{{ login_url }}">Войти</a></p>
 
 
 {% endblock %}

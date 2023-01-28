@@ -67,7 +67,8 @@ def mainpage(request):
         'prices_sale':prices_sale,
         'prices_rent':prices_rent,
         'page_name':page_name,
-        'paginator':paginator
+        'paginator':paginator,
+        'cur_page': page
     }
 
     return render(request, 'mainpage.html', context)

@@ -3,25 +3,27 @@
 {% block title %}Agency - Личный кабинет{% endblock %}
 {% block content %}
 
-<h1 class="main-title">Личный кабинет</h1>
-<div class="profile_info">
+<div class="profile__title">Личный кабинет</div>
+<div class="profile__info">
     <img src='{{ profile.photo.url }}' alt="#" class="profile-img">
-    <div class="profile_info_text">
+    <div class="profile__info_text">
         <p>{{ profile.name }} {{ profile.surname }}</p>
         <p>Мобильный телефон: {{ profile.phone }}</p>
         <p>Email: {{ profile.email }}</p>
-
-        <a href="{% url 'profile-edit' %}"><button class="message_btn profile_btn">Редактировать</button></a>
-        <a href="{% url 'account_logout' %}"><button class="message_btn profile_btn">Выйти</button></a>
+        <div class="profile__actions">
+            <a href="{% url 'profile-edit' %}"class="profile__action_btn">Редактировать</a>
+            <a href="{% url 'account_logout' %}" class="profile__action_btn">Выйти</a>    
+        </div>
     </div>
 </div>
-<h1 class="main-title">Избранное</h1>
-<div class="cards">
+
+<h1 class="profile__subtitle">Избранное</h1>
+<div class="fav">
     {% for card in favorites %}
         {% include 'favorites.html' %}
     {% endfor %}
     {% if favorites is None %}
-    <p class="manager-title">Здесь пока пусто(</p>
+    <p class="profile__liked_empty_text">Здесь пока ничего нет</p>
     {% endif %}
 </div>
 

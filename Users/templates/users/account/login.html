@@ -8,22 +8,33 @@
 {% block content %}
 
 
-<h1 class="main-title">Вход</h1>
+<h1 class="profile__title">Вход</h1>
 
-<form class="profile_form_part" method="POST" action="{% url 'account_login' %}">
+<ul class="errorlist">
+  {% for key, value in form.errors.items %}
+      <li>{% if key != '__all__' %}{{ key }} {% endif %}{{ value }}</li>
+  {% endfor %}
+  </ul>
 
+<form class="profile__login_form" method="POST" action="{% url 'account_login' %}">
   {% csrf_token %}
   {% for field in form %}
-  {% if field.name == 'remember' %}
-  <div class="remember">
-    {{ field }}
-    <label class="profile_form_label" for="{{ field.auto_id }}">{{ field.label }}</label>
-    <a class="forgot_password_text" href="{% url 'account_reset_password' %}">Забыли пароль?</a>
-  </div>
-  {% else %}
-    <label class="profile_form_label" for="{{ field.auto_id }}">{{ field.label }}</label>
-  {{ field }}
-  {% endif %}
+    {% if field.name == 'remember' %}
+      <div class="remember">
+        <label class="profile_form_label" for="{{ field.auto_id }}">{{ field }}<div class="fake-checkbox">
+          <svg width="11" height="10" viewBox="0 0 11 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <line x1="1.40556" y1="4.60063" x2="4.60062" y2="8.59445" stroke="white" stroke-width="2" stroke-linecap="round"/>
+            <line x1="9.30567" y1="1.38078" x2="4.71412" y2="8.58322" stroke="white" stroke-width="2" stroke-linecap="round"/>
+          </svg>            
+        </div>{{ field.label }}</label>
+        <a class="forgot_password_text" href="{% url 'account_reset_password' %}">Забыли пароль?</a>
+      </div>
+    {% else %}
+      <div>
+        <label class="profile_form_label" for="{{ field.auto_id }}">{{ field.label }}</label>
+        {{ field }}
+      </div>
+    {% endif %}
   {% endfor %}
 
   {% if redirect_field_value %}
@@ -31,10 +42,9 @@
   {% endif %}
 
   <button class="message_btn" type="submit">Войти</button>
-
 </form>
 
-<p class="users_text">Если у вас ещё нет аккаунта, пожалуйста, 
+<p class="users_text last">Если у вас ещё нет аккаунта, пожалуйста, 
 <a href="{{ signup_url }}">зарегистрируйтесь</a></p>
 
 {% endblock %}
