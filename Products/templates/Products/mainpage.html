@@ -15,6 +15,7 @@
 		<input placeholder="Поиск..." type="text" name="search" class="search__input">
 		<input type="submit" value='Найти' class="search__btn">
 		<button href="/mainpage" class="search__btn">Сбросить</button>
+		<button href="/mainpage" class="search__btn search__btn_mobile">X</button>
 	</form>
 </div>
 
@@ -57,7 +58,7 @@
 	{% endfor %}
 </div>    
 
-<h1 class="mainpage__title">Все объявления</h1>
+<h1 class="mainpage__title" id="all">Все объявления</h1>
 <div class="mainpage__cards">
 	{% for card in cards %}
 		<a href='card{{ card.id }}' class="card">
@@ -134,9 +135,9 @@
 <div class="mainpage__pagination">
 	{% for page in cards.paginator.page_range %}
 		{% if page == cards.number %}
-			<a href="?page={{page}}" class="pagination__button pagination__button_active">{{page}}</a>
+			<div class="pagination__button pagination__button_active">{{page}}</div>
 		{% else %}
-		<a href="?page={{page}}" class="pagination__button">{{page}}</a>
+			<a href="?page={{page}}#all" class="pagination__button">{{page}}</a>
 		{% endif %}
 	{% endfor %}
 </div>

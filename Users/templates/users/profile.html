@@ -5,7 +5,9 @@
 
 <div class="profile__title">Личный кабинет</div>
 <div class="profile__info">
-    <img src='{{ profile.photo.url }}' alt="#" class="profile-img">
+    <div class="profile__info_photo">
+        <img src='{{ profile.photo.url }}' alt="#">
+    </div>
     <div class="profile__info_text">
         <p>{{ profile.name }} {{ profile.surname }}</p>
         <p>Мобильный телефон: {{ profile.phone }}</p>
