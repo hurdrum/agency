@@ -263,6 +263,10 @@ header {
 	right: 7px;
 }
 
+.card__slider_like_active svg path {
+	fill: #15784E;
+}
+
 .card__text {
 	margin-top: 15px;
 	margin-left: 10px;
@@ -384,6 +388,10 @@ header {
 	width: 370px;
 	height: 230px;
 	border-radius: 2px 2px 0px 0px;
+}
+
+.profile__subtitle + .mainpage__cards {
+	margin-bottom: 100px;
 }
 
 .profile_info {
@@ -798,6 +806,11 @@ footer{
 	cursor: pointer;
 }
 
+.product__fav_btn_active {
+	background: #15784E;
+	color: #fff;
+}
+
 .product__fav_btn:hover {
 	background: #15784E;
 	color: #fff;
@@ -1105,6 +1118,9 @@ footer{
 
 /* 320+ */
 @media screen and (max-width: 640px) {
+	.profile__subtitle + .mainpage__cards {
+		margin-bottom: 40px;
+	}
 	.container {
 		padding: 0 10px;
 	}

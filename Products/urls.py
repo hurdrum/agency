@@ -5,4 +5,5 @@ from . import views
 urlpatterns = [
     path('', views.mainpage, name = "mainpage"),
     path('card<str:pk>', views.card, name = 'card'),
+    path('like', views.like, name = 'like')
 ]

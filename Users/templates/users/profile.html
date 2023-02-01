@@ -1,6 +1,12 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block title %}Agency - Личный кабинет{% endblock %}
+{% block title %}House & Home - Профиль{% endblock %}
+{% block head %}
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"
+/>
+{% endblock %}
 {% block content %}
 
 <div class="profile__title">Личный кабинет</div>
@@ -20,13 +26,51 @@
 </div>
 
 <h1 class="profile__subtitle">Избранное</h1>
-<div class="fav">
+<div class="mainpage__cards">
     {% for card in favorites %}
-        {% include 'favorites.html' %}
+        <a href='card{{ card.id }}' class="card">
+            <div class="card__slider">
+                <div class="card__slider_arrow" id="mainpage_card_slider_arrow_prev">
+                    <svg width="9" height="16" viewBox="0 0 9 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M0.292893 7.29289C-0.0976311 7.68342 -0.0976311 8.31658 0.292893 8.70711L6.65685 15.0711C7.04738 15.4616 7.68054 15.4616 8.07107 15.0711C8.46159 14.6805 8.46159 14.0474 8.07107 13.6569L2.41421 8L8.07107 2.34315C8.46159 1.95262 8.46159 1.31946 8.07107 0.928932C7.68054 0.538408 7.04738 0.538408 6.65685 0.928932L0.292893 7.29289ZM1 9H2L2 7H1L1 9Z" fill="black"/>
+                    </svg>						
+                </div>
+                <div class="card__slider_wrapper">
+                    {% for image in card.get_images  %}
+                        <div class="card__slider_photo">
+                            <img src="/{{ image.image }}" alt="{{ card.title }}">
+                        </div>
+                    {% endfor %}
+                </div>
+                <div class="card__slider_arrow" id="mainpage_card_slider_arrow_next">
+                    <svg width="9" height="15" viewBox="0 0 9 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M8.70711 8.27345C9.09763 7.88293 9.09763 7.24976 8.70711 6.85924L2.34315 0.495277C1.95262 0.104753 1.31946 0.104753 0.928932 0.495277C0.538408 0.885802 0.538408 1.51897 0.928932 1.90949L6.58579 7.56635L0.928932 13.2232C0.538408 13.6137 0.538408 14.2469 0.928932 14.6374C1.31946 15.0279 1.95262 15.0279 2.34315 14.6374L8.70711 8.27345ZM7 8.56635H8V6.56635H7V8.56635Z" fill="black"/>
+                    </svg>						
+                </div>
+                <div class="card__slider_type">{{ card.status }}</div>
+                <div class="card__slider_like card__slider_like_active" data-id="{{ card.id }}">
+                    <svg width="29" height="25" viewBox="0 0 29 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M8.82154 1.01071C10.8143 0.990931 12.1285 1.36295 14.2069 3.7745C14.6257 4.26037 15.3843 4.27017 15.8106 3.79089C17.6971 1.66981 19.1126 0.89767 21.6725 1.01071C24.1881 1.26092 26.0303 2.70908 27.0271 4.74543C28.9275 8.6585 28.0413 12.0979 24.391 15.7836C20.9986 18.9627 18.936 20.6394 15.6265 23.4641C15.2626 23.7747 14.7284 23.7854 14.3541 23.4874C10.9373 20.7677 8.87593 18.9983 5.44398 15.7836C1.97141 12.6406 1.1341 8.41392 2.89029 4.91142C4.65877 2.00289 6.52799 1.00828 8.82154 1.01071Z" fill="white" stroke="#15784E" stroke-width="2"/>
+                    </svg>						
+                </div>
+            </div>
+            <div class="card__text">
+                <div class="card__title">{{ card.title }}</div>
+                <div class="card__filed_value">{{ card.adress }}</div>
+                <div class="card__filed_value">{{ card.area }}</div>
+                <div class="card__filed_value">{{ card.price }}</div>
+                <div class="card__description">{{ card.description_main }}</div>
+                <div class="card__filed_value">{{ card.pub_date }}</div>
+            </div>
+        </a>
     {% endfor %}
-    {% if favorites is None %}
+    {% if not favorites %}
     <p class="profile__liked_empty_text">Здесь пока ничего нет</p>
     {% endif %}
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+<script src="{% static 'js/script.js' %}"></script>
+
 
 {% endblock %}

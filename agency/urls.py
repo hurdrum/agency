@@ -6,5 +6,5 @@ urlpatterns = [
     path('contacts/', include('CRM.urls')),
     path('users/', include('Users.urls')),
     path('', include('Products.urls')),
-    path('accounts/', include('allauth.urls'))
+    path('accounts/', include('allauth.urls'), name='accounts'),
 ]

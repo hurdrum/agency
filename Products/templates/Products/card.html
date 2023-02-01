@@ -32,7 +32,7 @@
 		</div>
 	</div>
 	<div class="product__actions">
-		<div class="product__fav_btn">В избранное</div>
+		<div class="product__fav_btn {% if card.isFavorite %}product__fav_btn_active{% endif %}" data-id="{{card.id}}">{% if card.isFavorite %}Удалить из избранного{% else %}В избранное{% endif %}</div>
 		<div class="product__contacts">
 			<div class="product__tel">{{card.telephone}}</div>
 			<div class="product__mail">{{card.Email}}</div>

@@ -1,17 +1,17 @@
 from django.shortcuts import render, redirect
 from .forms import ProfileEditForm
-from . import utils
 
 def profile(request):
     page_name = 'profile'
 
+    user = request.user
     profile = request.user.profile
-    favourites = utils.getting_favourites(profile)
+    favorites = user.favorite_prods.all()
 
     context = {
         'profile':profile,
         'page_name':page_name,
-        'favorites':favourites
+        'favorites':favorites
     }
     return render(request, 'profile.html', context)
 

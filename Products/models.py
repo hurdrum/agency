@@ -1,5 +1,6 @@
 from xml.dom.minidom import CharacterData
 from django.db import models
+from django.contrib.auth.models import User
 
 class Product(models.Model):
     title = models.CharField(max_length=50)
@@ -17,6 +18,7 @@ class Product(models.Model):
     isVIP = models.BooleanField()
     telephone = models.CharField(("Телефон"), max_length=50, null=True)
     Email = models.EmailField(("Email"), max_length=254, null=True)
+    users = models.ManyToManyField(User, related_name='favorite_prods')
 
     def __str__(self):
         return self.title
