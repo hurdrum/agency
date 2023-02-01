@@ -2,6 +2,12 @@
 {% load static %}
 
 {% block title %}House & Home{{ card.title }}{% endblock %}
+{% block head %}
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"
+/>
+{% endblock %}
 
 {% block content %}
 <div class="product">
@@ -13,9 +19,11 @@
 			</svg>						
 		</div>
 		<div class="product__slider_wrapper">
+			{% for image in card.get_images  %}
 			<div class="product__slider_photo">
-				<img src="{{ card.photo.url }}" alt="{{ card.title }}">
+				<img src="{{ image.image }}" alt="{{ card.title }}">
 			</div>
+			{% endfor %}
 		</div>
 		<div class="card__slider_arrow" id="mainpage_card_slider_arrow_next">
 			<svg width="9" height="15" viewBox="0 0 9 15" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -26,16 +34,18 @@
 	<div class="product__actions">
 		<div class="product__fav_btn">В избранное</div>
 		<div class="product__contacts">
-			<div class="product__tel">8 999 999 99 99</div>
-			<div class="product__mail">kolmackov.roman@yandex.ru</div>
+			<div class="product__tel">{{card.telephone}}</div>
+			<div class="product__mail">{{card.Email}}</div>
 		</div>
 	</div>
 	<div class="product__info">
 		<div class="card__filed_value">{{ card.adress }}</div>
 		<div class="card__filed_value">{{ card.area }}</div>
 		<div class="card__filed_value">{{ card.price }}</div>
-		<div class="card__description">{{ card.description_main }}</div>
+		<div class="card__description">{{ card.description }}</div>
 		<div class="card__filed_value">{{ card.pub_date }}</div>
 	</div>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+<script src="{% static 'js/script.js' %}"></script>
 {% endblock %}

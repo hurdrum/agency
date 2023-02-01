@@ -40,6 +40,15 @@ a {
 	color: #000;
 }
 
+.messages {
+	margin-top: 40px;
+}
+.messages li {
+	line-height: 1.4;
+    font-size: 18px;
+    color: #000000;
+}
+
 /* header */
 
 header {
@@ -218,12 +227,14 @@ header {
 
 .card__slider_wrapper {
 	width: 100%;
+	display: flex;
 }
 
 .card__slider_photo {
 	width: 100%;
 	padding-top: 61%;
 	position: relative;
+	flex-shrink: 0;
 }
 .card__slider_photo img {
 	position: absolute;
@@ -738,6 +749,11 @@ footer{
 	position: absolute;
 	top: 0;
 	left: 0;
+	display: flex;
+}
+
+.product__slider_photo {
+	flex-shrink: 0;
 }
 
 .product__actions {

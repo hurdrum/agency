@@ -8,30 +8,32 @@ class Product(models.Model):
     adress = models.CharField(max_length=50)
     area = models.IntegerField()
     price = models.IntegerField()
-    rooms = models.IntegerField()
-    garages = models.IntegerField()
-    photo = models.ImageField(upload_to='static/image/products')
     Product_status_choices = [
         ('Аренда','Аренда'),
         ('Продажа','Продажа'),
     ]
     status = models.CharField(max_length=15, choices=Product_status_choices, default='rent')
     pub_date = models.DateField(auto_now=False, auto_now_add=True)
+    isVIP = models.BooleanField()
+    telephone = models.CharField(("Телефон"), max_length=50, null=True)
+    Email = models.EmailField(("Email"), max_length=254, null=True)
 
     def __str__(self):
         return self.title
-
+    def get_images(self):
+        return self.image_set.all()
     class Meta:
         ordering = ['-pub_date']
 
-class Price(models.Model):
+class Image(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    image = models.ImageField(upload_to='static/image/products/')
+
+class Job(models.Model):
     title = models.CharField(max_length=50)
-    price = models.IntegerField()
-    status_choices = [
-        ('Аренда','Аренда'),
-        ('Продажа','Продажа'),
-    ]
-    status = models.CharField(max_length=15, choices=status_choices)
+    description = models.TextField(max_length=200)
+    pay = models.IntegerField()
+    telephone = models.CharField(max_length=20)
 
     def __str__(self):
         return self.title
