@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}House & Home{{ card.title }}{% endblock %}
+{% block head %}
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"
+/>
+{% endblock %}
+
+{% block content %}
+<div class="product">
+	<div class="product__title">{{card.status}} - {{ card.title }}</div>
+	<div class="product__slider">
+		<div class="card__slider_arrow" id="mainpage_card_slider_arrow_prev">
+			<svg width="9" height="16" viewBox="0 0 9 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+				<path d="M0.292893 7.29289C-0.0976311 7.68342 -0.0976311 8.31658 0.292893 8.70711L6.65685 15.0711C7.04738 15.4616 7.68054 15.4616 8.07107 15.0711C8.46159 14.6805 8.46159 14.0474 8.07107 13.6569L2.41421 8L8.07107 2.34315C8.46159 1.95262 8.46159 1.31946 8.07107 0.928932C7.68054 0.538408 7.04738 0.538408 6.65685 0.928932L0.292893 7.29289ZM1 9H2L2 7H1L1 9Z" fill="black"/>
+			</svg>						
+		</div>
+		<div class="product__slider_wrapper">
+			{% for image in card.get_images  %}
+			<div class="product__slider_photo">
+				<img src="{{ image.image.url }}" alt="{{ card.title }}">
+			</div>
+			{% endfor %}
+		</div>
+		<div class="card__slider_arrow" id="mainpage_card_slider_arrow_next">
+			<svg width="9" height="15" viewBox="0 0 9 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+				<path d="M8.70711 8.27345C9.09763 7.88293 9.09763 7.24976 8.70711 6.85924L2.34315 0.495277C1.95262 0.104753 1.31946 0.104753 0.928932 0.495277C0.538408 0.885802 0.538408 1.51897 0.928932 1.90949L6.58579 7.56635L0.928932 13.2232C0.538408 13.6137 0.538408 14.2469 0.928932 14.6374C1.31946 15.0279 1.95262 15.0279 2.34315 14.6374L8.70711 8.27345ZM7 8.56635H8V6.56635H7V8.56635Z" fill="black"/>
+			</svg>						
+		</div>
+	</div>
+	<div class="product__actions">
+		<div class="product__fav_btn {% if card.isFavorite %}product__fav_btn_active{% endif %}" data-id="{{card.id}}">{% if card.isFavorite %}Удалить из избранного{% else %}В избранное{% endif %}</div>
+		<div class="product__contacts">
+			<div class="product__tel">{{card.telephone}}</div>
+			<div class="product__mail">{{card.Email}}</div>
+		</div>
+	</div>
+	<div class="product__info">
+		<div class="card__filed_value">{{ card.adress }}</div>
+		<div class="card__filed_value">{{ card.area }}</div>
+		<div class="card__filed_value">{{ card.price }}</div>
+		<div class="card__description">{{ card.description }}</div>
+		<div class="card__filed_value">{{ card.pub_date }}</div>
+	</div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+<script src="{% static 'js/script.js' %}"></script>
+{% endblock %}
