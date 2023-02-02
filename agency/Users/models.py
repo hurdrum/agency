@@ -8,7 +8,6 @@ class Profile(models.Model):
     surname = models.CharField(max_length=100, blank=True)
     phone = models.CharField(max_length=30, blank=True)
     email = models.EmailField(max_length=200, blank=True)
-    favourites = models.CharField(max_length=300, blank=True, default='')
     create_data = models.DateField(auto_now_add=True)
     photo = models.ImageField(null = True, blank=True, upload_to='profiles/', default='static/image/default-profile.png')
 
