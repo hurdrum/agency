@@ -3,6 +3,8 @@ from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.shortcuts import render, HttpResponse, redirect
 from django.contrib.auth.decorators import login_required
 import json
+from django.utils.dateparse import parse_datetime
+import datetime
 
 
 def card(request, pk):
@@ -13,6 +15,8 @@ def card(request, pk):
     card.isFavotite = False
     if request.user.is_authenticated and user.favorite_prods.filter(id=pk):
         card.isFavorite = True
+
+    card.pub_date = card.pub_date.strftime("%d.%m.%Y")
 
     context = {
         'card':card,
@@ -33,6 +37,11 @@ def mainpage(request):
     VIPproducts = Product.objects.filter(isVIP=True)
     jobs = Job.objects.all()
     cards = Product.objects.filter(title__icontains=search, isVIP=False)
+
+    for card in cards:
+        card.pub_date = card.pub_date.strftime("%d.%m.%Y")
+    for card in VIPproducts:
+        card.pub_date = card.pub_date.strftime("%d.%m.%Y")
 
     if request.user.is_authenticated:
         for card in VIPproducts:
