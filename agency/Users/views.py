@@ -8,6 +8,9 @@ def profile(request):
     profile = request.user.profile
     favorites = user.favorite_prods.all()
 
+    for fav in favorites:
+        fav.pub_date = fav.pub_date.strftime("%d.%m.%Y")
+
     context = {
         'profile':profile,
         'page_name':page_name,

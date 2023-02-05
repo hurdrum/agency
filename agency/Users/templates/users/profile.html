@@ -28,7 +28,7 @@
 <h1 class="profile__subtitle">Избранное</h1>
 <div class="mainpage__cards">
     {% for card in favorites %}
-        <a href='card{{ card.id }}' class="card">
+        <a href='/card{{ card.id }}' class="card">
             <div class="card__slider">
                 <div class="card__slider_arrow" id="mainpage_card_slider_arrow_prev">
                     <svg width="9" height="16" viewBox="0 0 9 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -38,7 +38,7 @@
                 <div class="card__slider_wrapper">
                     {% for image in card.get_images  %}
                         <div class="card__slider_photo">
-                            <img src="/{{ image.image }}" alt="{{ card.title }}">
+                            <img src="{{ image.image.url }}" alt="{{ card.title }}">
                         </div>
                     {% endfor %}
                 </div>
